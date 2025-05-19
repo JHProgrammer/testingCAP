@@ -21,5 +21,5 @@ File or Folder | Purpose
 
 
 ## Learn More
-
+## Try
 Learn more at https://cap.cloud.sap/docs/get-started/.

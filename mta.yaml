@@ -21,7 +21,7 @@ modules:
     path: gen/srv
 
     parameters:
-      host: testingCAP-qas
+      host: testingCAP-qas-hfg
       memory: 256M
       instances: 1
       buildpack: nodejs_buildpack

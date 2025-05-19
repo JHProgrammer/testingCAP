@@ -21,7 +21,9 @@
     "cds-swagger-ui-express": "^0.10.0"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "build": "mbt build --mtar=testingCAP.mtar",
+    "deploy": "cf deploy ./mta_archives/testingCAP.mtar -f --retries 3"
   },
   "cds": {
     "sql": {

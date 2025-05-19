@@ -1,0 +1,4 @@
+ID,fullName,email,active
+s1,Ana Torres,ana@example.com,true
+s2,Bruno Díaz,bruno@example.com,true
+s3,Lucía Ríos,lucia@example.com,false

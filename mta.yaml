@@ -1,0 +1,81 @@
+_schema-version: 3.3.0
+
+ID: testingCAP
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+
+modules:
+
+  - name: testingCAP-srv
+    type: nodejs
+    path: gen/srv
+
+    parameters:
+      host: testingCAP-qas
+      memory: 256M
+      instances: 1
+      buildpack: nodejs_buildpack
+
+    build-parameters:
+      builder: npm-ci
+
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+
+    requires:
+      - name: testingCAP-db
+      - name: testingCAP-connectivity
+      - name: testingCAP-destination
+      - name: xsuaa-central
+
+
+  - name: testingCAP-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+
+    requires:
+      - name: testingCAP-db
+
+
+resources:
+  - name: testingCAP-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-name: HDI-TESTING-DB-QAS
+      service-plan: hdi-shared
+      config:
+        schema: TESTING_BD_QAS
+        makeUniqueName: false
+      properties:
+        hdi-container-name: '${service-name}'
+
+  - name: testingCAP-connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-plan: lite
+
+  - name: testingCAP-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+  - name: xsuaa-central
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service-name: xsuaa-central

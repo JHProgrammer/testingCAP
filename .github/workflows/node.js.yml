@@ -85,6 +85,6 @@ jobs:
           cf_pwd: ${{ secrets.CF_PWD }}
           cf_org: ${{ secrets.CF_ORG }}
           cf_space: ${{ secrets.CF_SPACE }}
-          cf_command: npm run deploy
+          cf_command: deploy ./mta_archives/testingCAP.mtar -f --retries 3
 
       

@@ -35,12 +35,35 @@ modules:
           srv-url: ${default-url}
 
     requires:
+      - name: testingCAP-db
       - name: testingCAP-connectivity
       - name: testingCAP-destination
       - name: xsuaa-central
 
 
+  - name: testingCAP-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+
+    requires:
+      - name: testingCAP-db
+
+
 resources:
+  - name: testingCAP-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-name: HDI-TESTING-DB-QAS
+      service-plan: hdi-shared
+      config:
+        schema: TESTING_BD_QAS
+        makeUniqueName: false
+      properties:
+        hdi-container-name: '${service-name}'
+
   - name: testingCAP-connectivity
     type: org.cloudfoundry.managed-service
     parameters:

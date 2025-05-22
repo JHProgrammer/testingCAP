@@ -36,8 +36,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install MBT
-        run: npm install -g mbt
+      - name: Install dependencies
+        run: npm install
       
       - name: Built MTA
         run: npm run build
@@ -66,9 +66,6 @@ jobs:
       
       - name: Install dependencies
         run: npm install
-      
-      - name: Install MBT
-        run: npm install -g mbt
       
       - name: Built MTA
         run: npm run build

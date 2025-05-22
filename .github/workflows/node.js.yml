@@ -29,15 +29,15 @@ jobs:
         uses: actions/cache@v3
         with:
           path: node_modules
-          kye: ${{runner.os}}-node_modules-${{ hashFiles('package-lock.json') }}
+          key: ${{runner.os}}-node_modules-${{ hashFiles('package-lock.json') }}
           restore-keys: |
             ${{runner.os}}-node_modules
       
       - name: Install dependencies
         run: npm install
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install MBT
+        run: npm install -g mbt
       
       - name: Built MTA
         run: npm run build
@@ -66,6 +66,9 @@ jobs:
       
       - name: Install dependencies
         run: npm install
+      
+      - name: Install MBT
+        run: npm install -g mbt
       
       - name: Built MTA
         run: npm run build

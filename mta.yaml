@@ -41,16 +41,6 @@ modules:
       - name: xsuaa-central
 
 
-  - name: testingCAP-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-
-    requires:
-      - name: testingCAP-db
-
-
 resources:
   - name: testingCAP-db
     type: com.sap.xs.hdi-container
